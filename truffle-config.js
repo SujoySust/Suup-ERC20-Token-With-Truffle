@@ -18,11 +18,11 @@
  *
  */
 
-// require('dotenv').config();
-// const mnemonic = process.env["MNEMONIC"];
-// const infuraProjectId = process.env["INFURA_PROJECT_ID"];
+require('dotenv').config();
+const privateKey = process.env["PRIVATE_KEY"];
+const infuraProjectId = process.env["INFURA_PROJECT_ID"];
  
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
   /**
@@ -47,12 +47,17 @@ module.exports = {
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
+    // sepolia: {
+    //   provider: () => new HDWalletProvider(mnemonic, infuraProjectId),
+    //   network_id: "11155111",
+    //   gas: 4465030,
+    // },
     //
-    // goerli: {
-    //   provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/${infuraProjectId}`),
-    //   network_id: 5,       // Goerli's id
-    //   chain_id: 5
-    // }
+    goerli: {
+      provider: () => new HDWalletProvider(privateKey, infuraProjectId),
+      network_id: 5,       // Goerli's id
+      chain_id: 5
+    }
   },
 
   // Set default mocha options here, use special reporters etc.
